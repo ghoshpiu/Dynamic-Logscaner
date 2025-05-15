@@ -66,12 +66,12 @@ def setup_snowflake_connection():
     # Replace with your Snowflake credentials and configurations
     conn = snowflake.connector.connect(
         user='svc_python',
-        password='Fb0Ie14bBdgsIducn1',
-        account= 'CPTECHPARTNERORG-CPTECHPARTNER',
-        warehouse='CTI_OTHER',
-        database='CTI_AUDIT_FW',
-        schema='CTI_AUDIT',
-        role='CTI_AUDIT_ADMIN'
+        password='hjdhggkj',
+        account= 'Personal',
+        warehouse='Log',
+        database='LOG_AUDIT',
+        schema='LOG_AUDIT_SCHEMA',
+        role='Admin'
     )
     return conn
 
