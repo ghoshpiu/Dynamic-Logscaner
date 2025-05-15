@@ -44,12 +44,12 @@ def is_error_line(line, patterns=ERROR_PATTERNS):
 def setup_snowflake_connection():
     return snowflake.connector.connect(
         user='svc_python',
-        password='Fb0Ie14bBdgsIducn1',
-        account='CPTECHPARTNERORG-CPTECHPARTNER',
-        warehouse='CTI_OTHER',
-        database='CTI_AUDIT_FW',
-        schema='CTI_AUDIT',
-        role='CTI_AUDIT_ADMIN'
+        password='hjdhggkj',
+        account= 'Personal',
+        warehouse='Log',
+        database='LOG_AUDIT',
+        schema='LOG_AUDIT_SCHEMA',
+        role='Admin'
     )
 
 # --- Fetch recent LOGSCAN_IDs ---
@@ -59,7 +59,7 @@ def fetch_recent_logscan_ids(cursor, last_timestamp, batch_size=100):
         SELECT ID
         FROM (
             SELECT ID, MAX(SCAN_TIMESTAMP) AS MAX_TS
-            FROM CTI_AUDIT_FW.CTI_AUDIT.LOGSCAN_RESULTS
+            FROM LOG_AUDIT.LOG_AUDIT_SCHEMA.LOGSCAN_RESULTS
             WHERE SCAN_TIMESTAMP > %s
             GROUP BY ID
         )
@@ -72,7 +72,7 @@ def fetch_recent_logscan_ids(cursor, last_timestamp, batch_size=100):
 def fetch_log_entries(cursor, logscan_id):
     cursor.execute("""
         SELECT ID, FILE_NAME, LINE_NUMBER, LINE_TIMESTAMP, MATCHING_LINE, SCAN_TIMESTAMP,SYSTEM_TYPE
-        FROM CTI_AUDIT_FW.CTI_AUDIT.LOGSCAN_RESULTS
+        FROM LOG_AUDIT.LOG_AUDIT_SCHEMA.LOGSCAN_RESULTS
         WHERE ID = %s
         ORDER BY LINE_NUMBER, SCAN_TIMESTAMP
     """, (logscan_id,))
@@ -335,7 +335,7 @@ def parse_session_from_logs(logs, logscan_id):
 # --- Upsert into session audit table ---
 def upsert_session(cursor, session):
     cursor.execute("""
-        INSERT INTO CTI_AUDIT_FW.CTI_AUDIT.ETL_LOG_AUDIT (
+        INSERT INTO LOG_AUDIT.LOG_AUDIT_SCHEMA.ETL_LOG_AUDIT (
             LOGSCAN_ID, FILE_NAME, SYSTEM_TYPE, SOURCE_NAME, TARGET_NAME, TASK_RUN_ID,
             USERNAME, TASK_NAME, WARNINGS, SESSION_START_TS, SESSION_END_TS,
             TOTAL_DURATION, SOURCE_ROW_DETAIL, TARGET_ROW_DETAIL, SOURCE_SUCCESS_ROWCNT, SOURCE_ERROR_ROWCNT,
@@ -349,7 +349,7 @@ def upsert_session(cursor, session):
             %(TARGET_SUCCESS_ROWCNT)s, %(TARGET_ERROR_ROWCNT)s,
             %(ERROR_MESSAGE)s, %(RUN_STATUS_CODE)s, %(RUN_STATUS)s, %(LASTUPDATED)s
         WHERE NOT EXISTS (
-            SELECT 1 FROM CTI_AUDIT_FW.CTI_AUDIT.ETL_LOG_AUDIT 
+            SELECT 1 FROM LOG_AUDIT.LOG_AUDIT_SCHEMA.ETL_LOG_AUDIT 
             WHERE LOGSCAN_ID = %(LOGSCAN_ID)s
         )
     """, session)
