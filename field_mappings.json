@@ -1,0 +1,27 @@
+{
+  "default": {
+    "TASK_NAME": ["task name", "job", "serviceName", "component"],
+    "USERNAME": ["user", "owner", "executed by", "started by"],
+    "LEVEL": ["level", "log_level", "severity"],
+    "MESSAGE": ["message", "log_msg", "description"],
+    "ERROR_PATTERNS": ["error", "fail", "exception", "terminated", "abort"],
+    "WARNING_PATTERNS": ["warn", "warning", "alert"]
+  },
+  "CDGC": {
+    "TASK_NAME": ["serviceName", "componentId"],
+    "USERNAME": ["userId"],
+    "LEVEL": ["level"],
+    "MESSAGE": ["message"],
+    "ERROR_PATTERNS": ["error", "exception"],
+    "WARNING_PATTERNS": ["warning"]
+  },
+  "INFA": {
+    "TASK_NAME": ["task name:", "importing task"],
+    "USERNAME": ["started by:"],
+	  "TASK_RUN_ID": ["run id"],
+    "LEVEL": ["status"],
+    "MESSAGE": ["line"],
+    "ERROR_PATTERNS": ["fail", "fatal", "rollback"],
+    "WARNING_PATTERNS": ["warning"]
+  }
+}

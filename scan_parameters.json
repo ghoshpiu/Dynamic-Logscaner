@@ -1,0 +1,30 @@
+[
+    {
+        "SYSTEM_TYPE": "INFA",
+        "KEY_WORDS": "Task Name:,Started By,Importing Connection:,Importing Source Definition:,Importing Target Definition:,<Warning>,inserted rows,Output Rows,Affected Rows,Applied Rows,Rejected Rows,Session completed,Session run completed successfully,Session run completed with failure,target load summary,source load summary,error,run id,table",
+        "LOG_FILE_PATH": "C:\\Users\\PRIYA GHOSH\\Downloads\\Logs"
+    },
+
+
+    {
+        "SYSTEM_TYPE": "CDGC",
+        "KEY_WORDS": "sync_realtime_content,job_request_payload,spark_conf,task_name,business_assets_score_aggregation,real time content sync completed,invoking real time content sync,score propagation",
+        "LOG_FILE_PATH": "C:\\Users\\PRIYA GHOSH\\Downloads\\CDGC"
+    },
+
+    {
+        "SYSTEM_TYPE": "DBT",
+        "LOG_FILE_PATH": "C:\\Users\\PRIYA GHOSH\\Downloads\\DBT",
+        "KEY_WORDS": "dbt command failed,encountered an error,insufficient privileges,sql access control error,warning,error,failed,unable to do partial parsing,did not find matching node,configuration paths exist,not found,database error,test failure,build failure"
+      },
+
+
+    {
+        "SYSTEM_TYPE": "GENERIC",
+        "KEY_WORDS": "apache tomcat,http status,servlet,jenkins,build started,build failed,mass ingestion task:,ingestion completed,skipped,Task Name:,Started By,Importing Connection:,Importing Source Definition:,Importing Target Definition:,<Warning>,inserted rows,Output Rows,Affected Rows,Applied Rows,Rejected Rows,Session completed,Session run completed successfully,Session run completed with failure,target load summary,source load summary,error,run id,table",
+        "LOG_FILE_PATH": "C:\\Users\\PRIYA GHOSH\\Downloads\\Generic Files"
+    }
+    
+
+      
+]
