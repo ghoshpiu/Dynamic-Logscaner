@@ -12,7 +12,7 @@ from tqdm import tqdm
 import json
 import csv
 
-warehouse = "CTI_OTHER"
+warehouse = "Log"
 PARAMETER_FILE = os.path.join(os.path.dirname(__file__), "last_run_timestamps.json")
 
 
@@ -85,7 +85,7 @@ def is_file_processed(file_name, conn):
     # cursor.execute(f"USE WAREHOUSE {warehouse}")
 
     # Check if the file is already in the processed_files table
-    cursor.execute("SELECT COUNT(*) FROM CTI_AUDIT_FW.CTI_AUDIT.PROCESSED_LOGFILES WHERE FILE_NAME = %s", (file_name,))
+    cursor.execute("SELECT COUNT(*) FROM LOG_AUDIT.LOG_AUDIT_SCHEMA.PROCESSED_LOGFILES WHERE FILE_NAME = %s", (file_name,))
     result = cursor.fetchone()
     cursor.close()
 
@@ -101,7 +101,7 @@ def mark_file_processed(file_name, conn):
     # cursor.execute(f"USE WAREHOUSE {warehouse}")
 
     # Insert the processed file into the table
-    cursor.execute("INSERT INTO CTI_AUDIT_FW.CTI_AUDIT.PROCESSED_LOGFILES (FILE_NAME) VALUES (%s)", (file_name,))
+    cursor.execute("INSERT INTO LOG_AUDIT.LOG_AUDIT_SCHEMA.PROCESSED_LOGFILES (FILE_NAME) VALUES (%s)", (file_name,))
     conn.commit()
     cursor.close()
 
@@ -119,7 +119,7 @@ def log_scan_result(file_id,file_name, line_number, log_timestamp, matching_line
 
     # Insert the scan result into the scan_results table
     cursor.execute("""
-        INSERT INTO CTI_AUDIT_FW.CTI_AUDIT.LOGSCAN_RESULTS (ID, FILE_NAME, LINE_NUMBER, LINE_TIMESTAMP, MATCHING_LINE,SYSTEM_TYPE)
+        INSERT INTO LOG_AUDIT.LOG_AUDIT_SCHEMA.LOGSCAN_RESULTS (ID, FILE_NAME, LINE_NUMBER, LINE_TIMESTAMP, MATCHING_LINE,SYSTEM_TYPE)
         VALUES (%s, %s, %s, %s, %s,%s)
     """, (file_id, file_name, line_number, log_timestamp, matching_line,system_type))
 
